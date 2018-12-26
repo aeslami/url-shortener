@@ -1,6 +1,12 @@
 {
   "version": 2,
   "name": "url-shortener",
+  "alias": ["url.nerdsnotebook.com"],
+  "github": {
+    "enabled": true,
+    "autoAlias": true,
+    "silent": true
+  },
   "regions": ["all"],
   "builds": [
     { "src": "server/index.js", "use": "@now/node-server" },
