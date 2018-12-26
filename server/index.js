@@ -1,19 +1,32 @@
 const express = require('express');
 const Url = require('./models/Url');
+const URL = require('url').URL;
 const port = process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
 
 app.post('/add', async (req, res) => {
-  const { fullURL } = req.body;
-  const result = await Url.create({ fullURL });
-  res.end(result.id);
+  try {
+    const { fullURL } = req.body;
+    const url = new URL(fullURL);
+    const result = await Url.create({ fullURL: url.href });
+    res.end(result.id);
+  } catch (error) {
+    console.error(error);
+    res.status(503).end('Error occurred');
+  }
 });
 
 app.get('/:shortURL', async (req, res) => {
-  const { shortURL } = req.params;
-  const { fullURL } = await Url.findById(shortURL);
-  res.status(301).redirect(fullURL);
+  try {
+    const { shortURL } = req.params;
+    const { fullURL } = await Url.findById(shortURL);
+    url = new URL(fullURL);
+    res.status(301).redirect(url.href);
+  } catch (error) {
+    console.error(error);
+    res.status(503).end('Error occurred');
+  }
 });
 
 app.listen(port, err => {
