@@ -12,6 +12,9 @@
     { "src": "server/index.js", "use": "@now/node-server" },
     { "src": "client/package.json", "use": "@now/static-build" }
   ],
+  "env": {
+    "MONGODB_URL": "@mongodburl"
+  },
   "routes": [
     { "src": "^/static/(.*)", "dest": "client/static/$1" },
     { "src": "^/favicon.ico", "dest": "client/favicon.ico" },

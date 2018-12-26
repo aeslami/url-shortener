@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const autoIncrement = require('mongoose-auto-increment');
 
 const Schema = mongoose.Schema;
-const connection = mongoose.createConnection(process.env.MongoDBURL);
+const connection = mongoose.createConnection(process.env.MONGODB_URL);
 
 autoIncrement.initialize(connection);
 
