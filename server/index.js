@@ -14,7 +14,6 @@ app.post('/add', async (req, res) => {
     const result = await Url.create({ fullURL: url.href });
     res.json({ shortURL: `${serverURL}${result.id}`, error: false });
   } catch (error) {
-    console.error(error);
     res.status(503).json({ error: true });
   }
 });
@@ -26,12 +25,10 @@ app.get('/:shortURL', async (req, res) => {
     url = new URL(fullURL);
     res.status(301).redirect(url.href);
   } catch (error) {
-    console.error(error);
     res.status(503).json({ error: true });
   }
 });
 
 app.listen(port, err => {
   if (err) throw err;
-  console.log(`> Ready On Server http://localhost:${port}`);
 });
