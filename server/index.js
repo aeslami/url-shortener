@@ -5,15 +5,17 @@ const port = process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
 
+const serverURL = 'https://url.nerdsnotebook.com/';
+
 app.post('/add', async (req, res) => {
   try {
     const { fullURL } = req.body;
     const url = new URL(fullURL);
     const result = await Url.create({ fullURL: url.href });
-    res.end(result.id);
+    res.json({ shortURL: `${serverURL}${result.id}`, error: false });
   } catch (error) {
     console.error(error);
-    res.status(503).end('Error occurred');
+    res.status(503).json({ error: true });
   }
 });
 
@@ -25,7 +27,7 @@ app.get('/:shortURL', async (req, res) => {
     res.status(301).redirect(url.href);
   } catch (error) {
     console.error(error);
-    res.status(503).end('Error occurred');
+    res.status(503).json({ error: true });
   }
 });
 
