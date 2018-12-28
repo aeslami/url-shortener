@@ -58,7 +58,12 @@ class Form extends Component {
         )}
         {this.state.shortURL.length > 0 && this.state.error.length == 0 && (
           <div>
-            <h2>{this.state.shortURL}</h2>
+            <h2>
+              Your shorten URL:{' '}
+              <a href={this.state.shortURL} target="blank">
+                {this.state.shortURL}
+              </a>
+            </h2>
             <br />
             <button onClick={() => this.setState(this.initialState)}>
               Shorten another link
