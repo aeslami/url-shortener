@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
+import Form from './components/Form';
 
-class App extends Component {
-  render() {
-    return <div>URL Shortener</div>;
-  }
-}
+const App = () => {
+  return <Form />;
+};
 
 export default App;
