@@ -1,24 +1,20 @@
 import React, { Component } from 'react';
 
+const initialState = {
+  fullURL: '',
+  shortURL: '',
+  error: ''
+};
+
 class Form extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      fullURL: '',
-      shortURL: '',
-      error: ''
-    };
+    this.state = initialState;
   }
 
-  initialState = {
-    fullURL: '',
-    shortURL: '',
-    error: ''
-  };
-
   onURLChange = e => {
-    this.setState({ fullURL: e.target.value });
+    this.setState({ fullURL: e.target.value, error: '' });
   };
 
   onFormSubmit = async e => {
@@ -65,7 +61,7 @@ class Form extends Component {
               </a>
             </h2>
             <br />
-            <button onClick={() => this.setState(this.initialState)}>
+            <button onClick={() => this.setState(initialState)}>
               Shorten another link
             </button>
           </div>
